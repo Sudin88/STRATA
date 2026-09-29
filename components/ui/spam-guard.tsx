@@ -14,9 +14,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
  *
  * When either trips, the caller fakes a success response and skips the insert,
  * so the bot gets no signal that it was caught. This stops the common
- * form-filling bots. It does NOT stop an attacker POSTing straight at the
- * Supabase REST endpoint — for that, add Cloudflare Turnstile or an Edge
- * Function proxy later. See the note in components/feedback-form.tsx.
+ * form-filling bots cheaply, client-side. The `submit` edge function re-runs
+ * both checks server-side (honeypot value + elapsedMs are sent to it) and adds
+ * per-IP rate limiting and real email verification, so an attacker POSTing
+ * straight at the endpoint is caught there — this hook is just the first,
+ * free filter. See supabase/functions/submit/index.ts and lib/submit.ts.
  */
 const MIN_FILL_MS = 1500;
 
@@ -39,7 +41,15 @@ export function useSpamGuard() {
     return false;
   }, [trap]);
 
-  return { trap, setTrap, isLikelyBot };
+  // Ms since the form mounted, sent to the server so it can re-run the timing
+  // check itself (the client check is easily bypassed). 0 until the mount
+  // effect runs, which the server reads as "fails open" — same as isLikelyBot.
+  const elapsedMs = useCallback(
+    () => (startedAt.current === 0 ? 0 : Date.now() - startedAt.current),
+    []
+  );
+
+  return { trap, setTrap, isLikelyBot, elapsedMs };
 }
 
 /**

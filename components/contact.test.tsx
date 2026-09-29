@@ -4,28 +4,33 @@ import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event";
 
 /*
- * Mock the Supabase client the form inserts through. `insertMock` is hoisted so
- * the factory can close over it, and each test sets its resolved value.
+ * The form no longer writes to Supabase directly — it calls submitForm(), which
+ * invokes the `submit` edge function (rate limit + email verification live
+ * there, and have their own coverage). Here we mock submitForm and assert the
+ * component sends the right payload and maps each result to the right UI.
  */
-const { insertMock, fromMock } = vi.hoisted(() => {
-  const insertMock = vi.fn();
-  const fromMock = vi.fn(() => ({ insert: insertMock }));
-  return { insertMock, fromMock };
-});
+const { submitFormMock } = vi.hoisted(() => ({ submitFormMock: vi.fn() }));
+
+vi.mock("@/lib/submit", () => ({ submitForm: submitFormMock }));
 
 vi.mock("@/lib/supabase", () => ({
   isSupabaseConfigured: true,
-  supabase: { from: fromMock },
+  supabase: {},
 }));
 
 /*
  * Neutralize the spam guard so these tests exercise the submission path
  * directly. Its own timing/honeypot behavior is orthogonal to what we assert
  * here, and the real 1500ms timing check would otherwise flag the fast
- * automated submit as a bot and silently skip the insert.
+ * automated submit as a bot and silently skip the submit.
  */
 vi.mock("@/components/ui/spam-guard", () => ({
-  useSpamGuard: () => ({ trap: "", setTrap: vi.fn(), isLikelyBot: () => false }),
+  useSpamGuard: () => ({
+    trap: "",
+    setTrap: vi.fn(),
+    isLikelyBot: () => false,
+    elapsedMs: () => 3000,
+  }),
   HoneypotField: () => null,
 }));
 
@@ -46,8 +51,8 @@ describe("<Contact />", () => {
     vi.clearAllMocks();
   });
 
-  it("inserts the inquiry into Supabase and confirms success", async () => {
-    insertMock.mockResolvedValue({ error: null });
+  it("submits the inquiry through the edge function and confirms success", async () => {
+    submitFormMock.mockResolvedValue({ ok: true });
     const user = userEvent.setup();
 
     render(<Contact />);
@@ -56,9 +61,10 @@ describe("<Contact />", () => {
       screen.getByRole("button", { name: /send project inquiry/i })
     );
 
-    await waitFor(() => expect(insertMock).toHaveBeenCalledTimes(1));
-    expect(fromMock).toHaveBeenCalledWith("inquiries");
-    expect(insertMock.mock.calls[0][0]).toMatchObject({
+    await waitFor(() => expect(submitFormMock).toHaveBeenCalledTimes(1));
+    const arg = submitFormMock.mock.calls[0][0];
+    expect(arg.kind).toBe("inquiry");
+    expect(arg.payload).toMatchObject({
       name: "Ada Lovelace",
       email: "ada@example.com",
       service: "SEO",
@@ -74,13 +80,39 @@ describe("<Contact />", () => {
       screen.getByRole("button", { name: /send project inquiry/i })
     );
 
-    expect(insertMock).not.toHaveBeenCalled();
+    expect(submitFormMock).not.toHaveBeenCalled();
     expect(screen.getByText(/enter your name/i)).toBeInTheDocument();
     expect(screen.getByText(/valid email address/i)).toBeInTheDocument();
   });
 
-  it("surfaces an error state when the insert fails", async () => {
-    insertMock.mockResolvedValue({ error: { message: "insert failed" } });
+  it("shows an email error when the server can't verify the address", async () => {
+    submitFormMock.mockResolvedValue({ ok: false, reason: "invalid_email" });
+    const user = userEvent.setup();
+
+    render(<Contact />);
+    await fillValidForm(user);
+    await user.click(
+      screen.getByRole("button", { name: /send project inquiry/i })
+    );
+
+    expect(await screen.findByText(/couldn't verify that email/i)).toBeInTheDocument();
+  });
+
+  it("shows a rate-limit message when the server throttles the submit", async () => {
+    submitFormMock.mockResolvedValue({ ok: false, reason: "rate_limited" });
+    const user = userEvent.setup();
+
+    render(<Contact />);
+    await fillValidForm(user);
+    await user.click(
+      screen.getByRole("button", { name: /send project inquiry/i })
+    );
+
+    expect(await screen.findByText(/sent a few messages already/i)).toBeInTheDocument();
+  });
+
+  it("surfaces a generic error state when the submit fails", async () => {
+    submitFormMock.mockResolvedValue({ ok: false, reason: "error" });
     const user = userEvent.setup();
 
     render(<Contact />);

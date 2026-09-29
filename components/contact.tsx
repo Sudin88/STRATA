@@ -13,6 +13,7 @@ import {
   type FormState,
 } from "@/lib/contact";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { submitForm } from "@/lib/submit";
 import { useSpamGuard, HoneypotField } from "@/components/ui/spam-guard";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -20,13 +21,13 @@ import { Reveal } from "@/components/ui/reveal";
 import { Field, inputClass } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 
-type Status = "idle" | "sending" | "success" | "error";
+type Status = "idle" | "sending" | "success" | "error" | "rate_limited";
 
 export function Contact() {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const { trap, setTrap, isLikelyBot } = useSpamGuard();
+  const { trap, setTrap, isLikelyBot, elapsedMs } = useSpamGuard();
 
   function set<K extends keyof FormState>(key: K, value: string) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -58,7 +59,7 @@ export function Contact() {
       return;
     }
 
-    // Silently drop suspected bots: report success but never write the row.
+    // Silently drop suspected bots: report success but never call the server.
     if (isLikelyBot()) {
       setStatus("success");
       setForm(EMPTY);
@@ -66,9 +67,13 @@ export function Contact() {
     }
 
     setStatus("sending");
-    try {
-      // Insert-only: inquiries are private leads, never read back by the client.
-      const { error } = await supabase.from("inquiries").insert({
+    // The edge function is the only writer: it rate-limits, verifies the email
+    // is deliverable, then inserts (which fires the notify-inquiry email).
+    const result = await submitForm({
+      kind: "inquiry",
+      trap,
+      elapsedMs: elapsedMs(),
+      payload: {
         name: form.name.trim(),
         company: form.company.trim() || null,
         email: form.email.trim(),
@@ -76,13 +81,22 @@ export function Contact() {
         service: form.service,
         budget: form.budget || null,
         details: form.details.trim(),
-      });
-      if (error) throw error;
+      },
+    });
+
+    if (result.ok) {
       setStatus("success");
       setForm(EMPTY);
-    } catch {
-      setStatus("error");
+      return;
     }
+
+    if (result.reason === "invalid_email") {
+      setStatus("idle");
+      setErrors({ email: "We couldn't verify that email — please check for typos." });
+      document.getElementById("cf-email")?.focus();
+      return;
+    }
+    setStatus(result.reason === "rate_limited" ? "rate_limited" : "error");
   }
 
   return (
@@ -267,6 +281,11 @@ export function Contact() {
                 <p aria-live="polite" className="text-sm">
                   {status === "success" && (
                     <span className="text-ion">Thanks, we&apos;ll be in touch shortly.</span>
+                  )}
+                  {status === "rate_limited" && (
+                    <span className="text-warn">
+                      You&apos;ve sent a few messages already. Please try again in a little while.
+                    </span>
                   )}
                   {status === "error" && (
                     <span className="text-warn">Something went wrong. Please try again.</span>

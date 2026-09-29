@@ -3,21 +3,25 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event";
 
-/* Same Supabase mock shape as contact.test.tsx — a hoisted insert spy. */
-const { insertMock, fromMock } = vi.hoisted(() => {
-  const insertMock = vi.fn();
-  const fromMock = vi.fn(() => ({ insert: insertMock }));
-  return { insertMock, fromMock };
-});
+/* Feedback goes through submitForm() → the `submit` edge function, same as the
+ * contact form. Mock submitForm and assert the payload + result-to-UI mapping. */
+const { submitFormMock } = vi.hoisted(() => ({ submitFormMock: vi.fn() }));
+
+vi.mock("@/lib/submit", () => ({ submitForm: submitFormMock }));
 
 vi.mock("@/lib/supabase", () => ({
   isSupabaseConfigured: true,
-  supabase: { from: fromMock },
+  supabase: {},
 }));
 
 /* Neutralize the spam guard so the fast automated submit isn't dropped. */
 vi.mock("@/components/ui/spam-guard", () => ({
-  useSpamGuard: () => ({ trap: "", setTrap: vi.fn(), isLikelyBot: () => false }),
+  useSpamGuard: () => ({
+    trap: "",
+    setTrap: vi.fn(),
+    isLikelyBot: () => false,
+    elapsedMs: () => 3000,
+  }),
   HoneypotField: () => null,
 }));
 
@@ -37,20 +41,18 @@ describe("<FeedbackForm />", () => {
     vi.clearAllMocks();
   });
 
-  it("inserts the review into Supabase and confirms success", async () => {
-    insertMock.mockResolvedValue({ error: null });
+  it("submits the review through the edge function and confirms success", async () => {
+    submitFormMock.mockResolvedValue({ ok: true });
     const user = userEvent.setup();
 
     render(<FeedbackForm />);
     await fillValidForm(user);
     await user.click(screen.getByRole("button", { name: /send feedback/i }));
 
-    await waitFor(() => expect(insertMock).toHaveBeenCalledTimes(1));
-    expect(fromMock).toHaveBeenCalledWith("reviews");
-    expect(insertMock.mock.calls[0][0]).toMatchObject({
-      name: "Ada Lovelace",
-      rating: 4,
-    });
+    await waitFor(() => expect(submitFormMock).toHaveBeenCalledTimes(1));
+    const arg = submitFormMock.mock.calls[0][0];
+    expect(arg.kind).toBe("feedback");
+    expect(arg.payload).toMatchObject({ name: "Ada Lovelace", rating: 4 });
     expect(await screen.findByText(/really appreciate/i)).toBeInTheDocument();
   });
 
@@ -60,13 +62,13 @@ describe("<FeedbackForm />", () => {
     render(<FeedbackForm />);
     await user.click(screen.getByRole("button", { name: /send feedback/i }));
 
-    expect(insertMock).not.toHaveBeenCalled();
+    expect(submitFormMock).not.toHaveBeenCalled();
     expect(screen.getByText(/enter your name/i)).toBeInTheDocument();
     expect(screen.getByText(/select a star rating/i)).toBeInTheDocument();
   });
 
-  it("surfaces an error state when the insert fails", async () => {
-    insertMock.mockResolvedValue({ error: { message: "insert failed" } });
+  it("surfaces a generic error state when the submit fails", async () => {
+    submitFormMock.mockResolvedValue({ ok: false, reason: "error" });
     const user = userEvent.setup();
 
     render(<FeedbackForm />);

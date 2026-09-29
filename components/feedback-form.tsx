@@ -10,6 +10,7 @@ import {
   type FeedbackState,
 } from "@/lib/feedback";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { submitForm } from "@/lib/submit";
 import { useSpamGuard, HoneypotField } from "@/components/ui/spam-guard";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -17,7 +18,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Field, inputClass } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 
-type Status = "idle" | "sending" | "success" | "error";
+type Status = "idle" | "sending" | "success" | "error" | "rate_limited";
 
 const RATINGS = [1, 2, 3, 4, 5] as const;
 
@@ -123,7 +124,7 @@ export function FeedbackForm() {
   const [form, setForm] = useState<FeedbackState>(EMPTY_FEEDBACK);
   const [errors, setErrors] = useState<FeedbackErrors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const { trap, setTrap, isLikelyBot } = useSpamGuard();
+  const { trap, setTrap, isLikelyBot, elapsedMs } = useSpamGuard();
 
   function set<K extends keyof FeedbackState>(key: K, value: FeedbackState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -152,8 +153,7 @@ export function FeedbackForm() {
       return;
     }
 
-    // Silently drop suspected bots: report success but never write the row, so
-    // the bot gets no feedback that it was filtered. See useSpamGuard.
+    // Silently drop suspected bots: report success but never call the server.
     if (isLikelyBot()) {
       setStatus("success");
       setForm(EMPTY_FEEDBACK);
@@ -161,24 +161,36 @@ export function FeedbackForm() {
     }
 
     setStatus("sending");
-    try {
-      // Insert only the columns the anon role is granted. `approved` is never
-      // sent — it defaults to false, so nothing a visitor submits is published
-      // until we approve it in the Supabase dashboard.
-      const { error } = await supabase.from("reviews").insert({
+    // Goes through the edge function, which rate-limits and (when an email is
+    // given) verifies it. `approved` is forced false server-side, so nothing a
+    // visitor submits is published until we approve it in the dashboard.
+    const result = await submitForm({
+      kind: "feedback",
+      trap,
+      elapsedMs: elapsedMs(),
+      payload: {
         name: form.name.trim(),
         company: form.company.trim() || null,
         email: form.email.trim() || null,
         rating: form.rating,
         feedback: form.feedback.trim(),
         consent: form.consent,
-      });
-      if (error) throw error;
+      },
+    });
+
+    if (result.ok) {
       setStatus("success");
       setForm(EMPTY_FEEDBACK);
-    } catch {
-      setStatus("error");
+      return;
     }
+
+    if (result.reason === "invalid_email") {
+      setStatus("idle");
+      setErrors({ email: "We couldn't verify that email — please check for typos." });
+      document.getElementById("fb-email")?.focus();
+      return;
+    }
+    setStatus(result.reason === "rate_limited" ? "rate_limited" : "error");
   }
 
   return (
@@ -301,6 +313,11 @@ export function FeedbackForm() {
                   {status === "success" && (
                     <span className="text-ion">
                       Thank you. We really appreciate you taking the time.
+                    </span>
+                  )}
+                  {status === "rate_limited" && (
+                    <span className="text-warn">
+                      You&apos;ve sent a few already. Please try again in a little while.
                     </span>
                   )}
                   {status === "error" && (
