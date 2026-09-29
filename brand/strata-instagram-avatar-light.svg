@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-label="Strata">
+  <!-- Light variant: warm-paper background with the on-page LogoMark colours
+       (ion top layer, near-black + grey lines). Use only if your feed grid is
+       dark; on a white feed a light avatar can vanish — prefer the ion version. -->
+  <rect width="1080" height="1080" fill="#faf9f7"/>
+  <g transform="translate(540,540) scale(27) translate(-11,-11)"
+     fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 6.5 11 2l8 4.5-8 4.5z" fill="#1f34cf"/>
+    <path d="M3 11.5 11 16l8-4.5" stroke="#121314" stroke-width="1.7"/>
+    <path d="M3 15.5 11 20l8-4.5" stroke="#686c73" stroke-width="1.7"/>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+name: CI
+
+# Lint, test, and production-build on every push and PR to main. NEXT_PUBLIC_*
+# values are inlined into the client bundle at BUILD time, so the build step
+# needs them present — CI uses harmless dummy values (never real keys) purely so
+# `next build` can complete. Real values live in the deploy platform's env.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test:run
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_ci_dummy
+        run: npm run build

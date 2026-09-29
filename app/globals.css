@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@theme inline {
+  /*
+   * Palette rules
+   * 1. Light editorial base. Dark-with-a-neon-glow is the default look of
+   *    generated sites; paper, black type and hairline rules are not.
+   * 2. Base is a warm off-white, not #fff — pure white flattens depth and
+   *    makes white cards on top of it invisible.
+   * 3. Panels sit LIGHTER than the page (white on paper), the inverse of a
+   *    dark theme. Depth comes from elevation shadows, never from glows.
+   * 4. Exactly one accent, used flat. No gradients on type, no halos.
+   */
+  --color-ink: #faf9f7; /* page base — warm paper */
+  --color-surface: #ffffff; /* raised panels */
+  --color-raise: #f2f1ed; /* recessed / tinted blocks */
+  --color-line: rgba(18, 19, 20, 0.1); /* 1px rules */
+  --color-line-strong: rgba(18, 19, 20, 0.22);
+  --color-fg: #121314; /* primary text — near-black, never #000 */
+  /* Ratios are the worst case: measured against the tinted `raise/60`
+     section bands, not the lighter page base, so every one clears AA there too. */
+  --color-mut: #5a5d63; /* secondary text — 6.0:1 */
+  --color-dim: #686c73; /* tertiary / labels — 4.8:1 */
+  --color-ion: #1f34cf; /* single accent — 8:1 on ink */
+  --color-ion-deep: #16249c; /* pressed / hover */
+  --color-ion-soft: rgba(31, 52, 207, 0.07);
+  --color-warn: #b32318; /* form errors — 5.9:1 on ink */
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-card: 18px;
+  --radius-pill: 999px;
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-pulse-soft: pulse-soft 4s ease-in-out infinite;
+  --animate-sweep: sweep 1.4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes sweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgba(31, 52, 207, 0.16);
+  color: var(--color-fg);
+}
+
+/* Visible focus for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--color-ion);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Reusable surface treatments ─────────────────────── */
+
+/* Frosted panel — for the sticky header and small floating chips */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid var(--color-line);
+}
+
+/*
+ * Elevation. A light theme reads depth from a tight contact shadow plus a
+ * wide, very soft ambient one — not from a coloured glow.
+ */
+.hairline {
+  box-shadow:
+    0 1px 2px rgba(18, 19, 20, 0.04),
+    0 10px 30px -18px rgba(18, 19, 20, 0.16);
+}
+
+.hairline-lift {
+  box-shadow:
+    0 1px 2px rgba(18, 19, 20, 0.05),
+    0 18px 44px -24px rgba(18, 19, 20, 0.24);
+}
+
+/* Fine engineering-grid backdrop */
+.grid-bg {
+  background-image: linear-gradient(rgba(18, 19, 20, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 19, 20, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Paper grain — multiplied so it darkens rather than washes out */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/*
+ * Section tint. Deliberately almost invisible — a faint cool cast at the top
+ * edge, not a spotlight. If you can point at it, it is too strong.
+ */
+.glow {
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 52, 207, 0.035),
+    transparent 55%
+  );
+}
+
+/* Soft-edge mask for full-bleed canvas fields */
+.field-fade {
+  mask-image: radial-gradient(ellipse 78% 72% at 50% 45%, #000 45%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 72% at 50% 45%, #000 45%, transparent 100%);
+}
+
+/* Uppercase mono eyebrow label */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+}
+
+/*
+ * Fluid display sizes. Weight 700 rather than 800 and a tighter track: an
+ * editorial headline, not a poster.
+ */
+.text-display {
+  font-size: clamp(2.35rem, 1.35rem + 4.2vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.038em;
+  font-weight: 700;
+}
+.text-heading {
+  font-size: clamp(1.85rem, 1.1rem + 2.7vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+/* Underline sweep for text links */
+.link-sweep {
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 1px;
+  transition: background-size 0.3s ease;
+}
+.link-sweep:hover {
+  background-size: 100% 1px;
+}
+
+/* ── Loading states ──────────────────────────────────── */
+
+/*
+ * Fail-safe for the first-paint curtain: if the Preloader never hydrates
+ * (JS blocked or errored) this keyframe still clears it.
+ */
+.preloader {
+  animation: curtain-failsafe 0.4s ease 3.6s forwards;
+}
+
+@keyframes curtain-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* Nobody who asked for less motion should sit behind a loading curtain. */
+@media (prefers-reduced-motion: reduce) {
+  .preloader {
+    display: none;
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-raise);
+  border: 1px solid var(--color-line);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(18, 19, 20, 0.05), transparent);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
