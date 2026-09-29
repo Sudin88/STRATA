@@ -32,6 +32,7 @@ export type ServiceIconKey =
   | "seo"
   | "web"
   | "video"
+  | "motion"
   | "social"
   | "ads"
   | "automation";
@@ -43,6 +44,8 @@ export interface Service {
   description: string;
   features: string[];
   cta: string;
+  /** Listed for interest but not yet deliverable — shown as "Coming soon". */
+  comingSoon?: boolean;
 }
 
 export const SERVICES: Service[] = [
@@ -95,14 +98,31 @@ export const SERVICES: Service[] = [
       "Short-form videos",
       "Video scripts",
       "Voiceovers",
-      "Motion graphics",
       "Creative variations",
     ],
     cta: "Create an Ad",
   },
   {
-    id: "social",
+    id: "motion",
     index: "S.04",
+    title: "Motion Graphics",
+    description:
+      "Animation that makes your brand move: logo stings, explainer videos, kinetic type and animated ads that turn a static idea into something people actually stop to watch.",
+    features: [
+      "Logo animation",
+      "Explainer videos",
+      "Kinetic typography",
+      "Animated ads",
+      "Brand intros & outros",
+      "Product animation",
+      "Social motion graphics",
+      "Storyboarding",
+    ],
+    cta: "Animate My Brand",
+  },
+  {
+    id: "social",
+    index: "S.05",
     title: "AI Social Media",
     description:
       "Show up consistently without burning out. We plan and produce your social content with AI, so the feed stays active and on-brand.",
@@ -119,7 +139,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "ads",
-    index: "S.05",
+    index: "S.06",
     title: "Paid Advertising",
     description:
       "Ad spend that earns its keep. We run search and social campaigns, test the creative constantly and put the budget where the results are.",
@@ -137,7 +157,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "automation",
-    index: "S.06",
+    index: "S.07",
     title: "AI Marketing Automation",
     description:
       "Hand the repetitive stuff to software. We build the chatbots, follow-ups and workflows that keep working while you sleep.",
@@ -151,6 +171,7 @@ export const SERVICES: Service[] = [
       "Customer follow-up",
     ],
     cta: "Automate My Growth",
+    comingSoon: true,
   },
 ];
 
@@ -253,7 +274,7 @@ export const PRICING: PricingTier[] = [
 export const FAQS = [
   {
     q: "What services do you offer?",
-    a: "Six things, really: AI-assisted SEO and content, website design and development, AI ad videos, social media, paid advertising and marketing automation. The point is they work together as one engagement, not six separate projects that never talk to each other.",
+    a: "Seven, really: AI-assisted SEO and content, website design and development, AI ad videos, motion graphics, social media and paid advertising, with AI marketing automation coming soon. The point is they work together as one engagement, not separate projects that never talk to each other.",
   },
   {
     q: "How does AI improve marketing?",
@@ -285,7 +306,7 @@ export const FAQS = [
   },
   {
     q: "Can you integrate AI automation?",
-    a: "Yes. We build the chatbots, CRM workflows, email sequences and lead-qualification systems that reply the moment someone reaches out and keep working after hours.",
+    a: "It's on the way. AI marketing automation (chatbots, CRM workflows, email sequences and lead qualification) is a service we're building out and it isn't available just yet. Tell us on the contact form if you want it, and we'll let you know the moment it's ready.",
   },
   {
     q: "How do we get started?",

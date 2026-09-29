@@ -29,7 +29,7 @@ export function Services({ limit, showHeading = true, viewAll }: ServicesProps) 
         ) : (
           /* The page hero above owns the visible heading, but the cards are h3 —
              without a level 2 between them the outline skips a level. */
-          <h2 className="sr-only">All six services</h2>
+          <h2 className="sr-only">All seven services</h2>
         )}
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, i) => (

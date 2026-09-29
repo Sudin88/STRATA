@@ -8,7 +8,7 @@ import { NetworkVisual } from "@/components/3d/network-visual";
 const PRINCIPLES = [
   {
     title: "One system, not five vendors",
-    body: "Search, content, creative, campaigns and automation all run off the same strategy and the same data, so every channel makes the next one cheaper and easier.",
+    body: "Search, content, creative and campaigns all run off the same strategy and the same data, so every channel makes the next one cheaper and easier.",
   },
   {
     title: "AI on the volume, humans on the judgment",

@@ -10,9 +10,9 @@ const KEYWORDS = ["SEO", "AI ADS", "LEADS", "CONVERSIONS", "GROWTH"] as const;
  * consented client results exist.
  */
 const METRICS = [
-  { value: "6", label: "Growth services" },
+  { value: "7", label: "Growth services" },
   { value: "1-day", label: "Reply time" },
-  { value: "24/7", label: "AI automation" },
+  { value: "Global", label: "Working worldwide" },
   { value: "AI-native", label: "By design" },
 ] as const;
 

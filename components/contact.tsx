@@ -134,9 +134,6 @@ export function Contact() {
                   </a>
                 ))}
               </div>
-              <p className="mt-6 font-mono text-[10px] tracking-widest text-dim uppercase">
-                Placeholder contact details, updated at launch
-              </p>
             </Reveal>
           </div>
 

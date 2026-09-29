@@ -24,7 +24,7 @@ const plexMono = IBM_Plex_Mono({
 
 const title = "AI Marketing Agency | AI SEO, Websites & AI Advertising";
 const description =
-  "We build AI-powered marketing systems including SEO, websites, AI advertising videos, social content, paid advertising and automation.";
+  "We build AI-powered marketing systems: SEO, websites, AI ad videos, motion graphics, social content and paid advertising.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

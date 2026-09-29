@@ -103,8 +103,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs leading-relaxed text-dim">
-            © {year} {SITE.name}. A new agency finding its feet. Contact details
-            are placeholders for now.
+            © {year} {SITE.name}. A new agency finding its feet.
           </p>
           <nav aria-label="Legal" className="flex items-center gap-5 text-xs text-dim">
             <Link href="/privacy" className="link-sweep transition-colors hover:text-fg">

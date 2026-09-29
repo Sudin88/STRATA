@@ -8,10 +8,10 @@ import { Reveal } from "@/components/ui/reveal";
  * describe the way every project is run. Labeled honestly below the row.
  */
 const METRICS = [
-  { label: "Disciplines", value: 6, suffix: "", detail: "services under one roof" },
+  { label: "Disciplines", value: 7, suffix: "", detail: "services under one roof" },
   { label: "Creative", value: 40, suffix: "+", detail: "ad variants per campaign" },
   { label: "Performance", value: 95, suffix: "+", detail: "target Lighthouse score" },
-  { label: "Automation", value: 24, suffix: "/7", detail: "systems always on" },
+  { label: "Reply time", value: 1, suffix: "-day", detail: "we get back to you fast" },
   { label: "Optimization", value: 2, suffix: "wk", detail: "test-and-learn cycles" },
 ] as const;
 

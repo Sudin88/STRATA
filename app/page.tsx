@@ -13,7 +13,7 @@ export default function Home() {
       <TrustBar />
       <Services
         limit={3}
-        viewAll={{ label: "View all six services", href: "/services" }}
+        viewAll={{ label: "View all seven services", href: "/services" }}
       />
       <WhyAI />
       <Work viewAll={{ label: "More about our work", href: "/work" }} />

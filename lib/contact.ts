@@ -7,9 +7,10 @@ export const SERVICE_OPTIONS = [
   "SEO",
   "Website Development",
   "AI Ad Videos",
+  "Motion Graphics",
   "Social Media",
   "Paid Advertising",
-  "AI Automation",
+  "AI Automation (coming soon)",
   "Other",
 ] as const;
 

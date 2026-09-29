@@ -15,7 +15,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${SITE.name}: AI marketing agency`,
     short_name: SITE.name,
     description:
-      "AI-powered marketing systems: SEO, websites, AI ad videos, social content, paid advertising and automation.",
+      "AI-powered marketing systems: SEO, websites, AI ad videos, motion graphics, social content and paid advertising.",
     start_url: "/",
     display: "standalone",
     background_color: "#faf9f7",

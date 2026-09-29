@@ -112,13 +112,14 @@ export function faqPageSchema(faqs: readonly { q: string; a: string }[]): Json {
   };
 }
 
-/** OfferCatalog of the six services, each provided by the org entity. */
+/** OfferCatalog of the services we can deliver today, each provided by the org entity. */
 export function serviceCatalogSchema(): Json {
   return {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
     name: `${SITE.name} services`,
-    itemListElement: SERVICES.map((s) => ({
+    // Don't advertise services we can't yet deliver in structured data.
+    itemListElement: SERVICES.filter((s) => !s.comingSoon).map((s) => ({
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",

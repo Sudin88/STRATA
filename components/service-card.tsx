@@ -62,6 +62,11 @@ export function ServiceCard({ service }: { service: Service }) {
               <ServiceIcon name={service.id} className="size-5" />
             </span>
             <span className="eyebrow">{service.index}</span>
+            {service.comingSoon && (
+              <span className="rounded-pill border border-line-strong px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-dim">
+                Coming soon
+              </span>
+            )}
           </div>
           <h3 className="text-lg font-bold tracking-tight sm:text-2xl">{service.title}</h3>
         </div>
@@ -99,16 +104,22 @@ export function ServiceCard({ service }: { service: Service }) {
         </div>
       </div>
 
-      <Link
-        href="/contact"
-        className="relative mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold text-fg transition-colors hover:text-ion"
-      >
-        {service.cta}
-        <ArrowUpRight
-          aria-hidden
-          className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-        />
-      </Link>
+      {service.comingSoon ? (
+        <span className="relative mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold text-dim">
+          Coming soon
+        </span>
+      ) : (
+        <Link
+          href="/contact"
+          className="relative mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold text-fg transition-colors hover:text-ion"
+        >
+          {service.cta}
+          <ArrowUpRight
+            aria-hidden
+            className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </Link>
+      )}
     </motion.article>
   );
 }
