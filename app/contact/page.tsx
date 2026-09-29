@@ -10,7 +10,7 @@ const description =
   "Tell us what you're building. Send a project inquiry and we'll show you where AI can create your biggest marketing advantage.";
 
 export const metadata = pageMetadata({
-  title: "Contact — Start a Project",
+  title: "Contact: Start a Project",
   description,
   path: "/contact",
 });
@@ -21,7 +21,7 @@ export default function ContactPage() {
       <JsonLd
         data={pageGraph({
           path: "/contact",
-          name: "Contact — Start a Project",
+          name: "Contact: Start a Project",
           description,
           breadcrumb: "Contact",
           type: "ContactPage",
@@ -33,7 +33,7 @@ export default function ContactPage() {
         breadcrumb="Contact"
         eyebrow="Contact"
         title="Tell us what you're building."
-        description="Share a few details and we'll come back with where AI can create your biggest advantage — plus a clear scope and timeline. No obligation."
+        description="Share a few details and we'll come back with where AI can create your biggest advantage, plus a clear scope and timeline. No obligation."
       />
       <Contact />
       <Faq limit={5} />

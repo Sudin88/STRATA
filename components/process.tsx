@@ -25,7 +25,7 @@ export function Process() {
         <SectionHeading
           eyebrow="Process"
           title="From idea to growth."
-          subtitle="Five steps, in this order — and the last one loops back to the start, because good marketing never really finishes."
+          subtitle="Five steps, in this order, and the last one loops back to the start, because good marketing never really finishes."
         />
 
         <ol ref={ref} className="relative mx-auto max-w-3xl">

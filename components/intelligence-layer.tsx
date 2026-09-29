@@ -8,15 +8,15 @@ import { NetworkVisual } from "@/components/3d/network-visual";
 const PRINCIPLES = [
   {
     title: "One system, not five vendors",
-    body: "Search, content, creative, campaigns and automation all run off the same strategy and the same data — so every channel makes the next one cheaper and easier.",
+    body: "Search, content, creative, campaigns and automation all run off the same strategy and the same data, so every channel makes the next one cheaper and easier.",
   },
   {
     title: "AI on the volume, humans on the judgment",
-    body: "AI takes the volume work: research, drafts, variations, reporting. The judgment calls — positioning, taste, knowing when to pull the plug on something — stay with people.",
+    body: "AI takes the volume work: research, drafts, variations, reporting. The judgment calls (positioning, taste, knowing when to pull the plug on something) stay with people.",
   },
   {
     title: "Measured, not asserted",
-    body: "We agree on the numbers that matter before we start, then report against them every month — including the experiments that flopped. No cherry-picking.",
+    body: "We agree on the numbers that matter before we start, then report against them every month, including the experiments that flopped. No cherry-picking.",
   },
 ] as const;
 
@@ -35,7 +35,7 @@ export function IntelligenceLayer() {
         <SectionHeading
           eyebrow="How we think"
           title="Marketing works better when it all talks to each other."
-          subtitle="Run channels in separate silos and they stall out. Wire them together — with AI handling the grunt work — and each cycle makes the next one smarter."
+          subtitle="Run channels in separate silos and they stall out. Wire them together (with AI handling the grunt work) and each cycle makes the next one smarter."
         />
 
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,0.9fr)] lg:gap-16">

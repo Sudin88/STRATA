@@ -25,7 +25,7 @@ export function Cta() {
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink/70 sm:text-lg">
                 Tell us what you&apos;re working on. We&apos;ll show you exactly
-                where AI can give you the biggest edge — no fluff, no obligation.
+                where AI can give you the biggest edge. No fluff, no obligation.
               </p>
 
               <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">

@@ -58,6 +58,6 @@ export function validate(form: FormState): FormErrors {
     errors.email = "Enter a valid email address.";
   if (!form.service) errors.service = "Choose the service you're interested in.";
   if (form.details.trim().length < 10)
-    errors.details = "Tell us a little more — at least a sentence.";
+    errors.details = "Tell us a little more, at least a sentence.";
   return errors;
 }

@@ -40,7 +40,7 @@ export default function GlobalError({
       >
         {/* metadata exports aren't allowed in error boundaries; set the tab
             title with React's <title> instead. */}
-        <title>Something went wrong — Strata</title>
+        <title>Something went wrong | Strata</title>
         <div style={{ maxWidth: "30rem" }}>
           <p
             style={{
@@ -73,7 +73,7 @@ export default function GlobalError({
               color: "#5a5d63",
             }}
           >
-            Sorry about that — it&apos;s on us, not you. Try reloading, and if it
+            Sorry about that. It&apos;s on us, not you. Try reloading, and if it
             keeps happening, please get in touch.
           </p>
           <button

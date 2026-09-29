@@ -46,7 +46,7 @@ export function TrustBar() {
       </div>
       <Container>
         <p className="mt-6 text-center text-xs text-dim">
-          These are the sectors we build for — yours could be the first name up here.
+          These are the sectors we build for. Yours could be the first name up here.
         </p>
       </Container>
     </section>

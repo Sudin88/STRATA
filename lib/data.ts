@@ -1,10 +1,10 @@
 export const SITE = {
   name: "Strata",
   tagline: "AI on the busywork. People on the decisions that matter.",
-  url: "https://strata.agency",
+  url: "https://strata-ai.net",
   email: "strata.agency.co@gmail.com",
   phone: "+977 9769684556",
-  location: "Kathmandu, Nepal — working worldwide",
+  location: "Kathmandu, Nepal. Working worldwide",
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/strata.agency.ai/" },
   ],
@@ -69,7 +69,7 @@ export const SERVICES: Service[] = [
     index: "S.02",
     title: "Website Design & Development",
     description:
-      "We design and build sites that load fast, look sharp and turn visitors into customers — not something pretty that just sits there.",
+      "We design and build sites that load fast, look sharp and turn visitors into customers, not something pretty that just sits there.",
     features: [
       "UI/UX design",
       "Landing pages",
@@ -87,7 +87,7 @@ export const SERVICES: Service[] = [
     index: "S.03",
     title: "AI Ad Videos",
     description:
-      "Ad videos that stop the scroll — made with AI production and a real creative eye, plus enough variations to find out what actually works.",
+      "Ad videos that stop the scroll, made with AI production and a real creative eye, plus enough variations to find out what actually works.",
     features: [
       "AI video generation",
       "Product advertisements",
@@ -180,7 +180,7 @@ export const PROCESS_STEPS = [
   {
     index: "02",
     title: "Strategize",
-    body: "We figure out where to focus first — and where AI gives you the biggest head start.",
+    body: "We figure out where to focus first, and where AI gives you the biggest head start.",
   },
   {
     index: "03",
@@ -253,23 +253,23 @@ export const PRICING: PricingTier[] = [
 export const FAQS = [
   {
     q: "What services do you offer?",
-    a: "Six things, really: AI-assisted SEO and content, website design and development, AI ad videos, social media, paid advertising and marketing automation. The point is they work together as one engagement — not six separate projects that never talk to each other.",
+    a: "Six things, really: AI-assisted SEO and content, website design and development, AI ad videos, social media, paid advertising and marketing automation. The point is they work together as one engagement, not six separate projects that never talk to each other.",
   },
   {
     q: "How does AI improve marketing?",
-    a: "It takes the slow, expensive parts off your plate — research, first drafts, creative variations, reporting — so more of your budget goes into strategy and testing. In practice that means more experiments each month, faster feedback and decisions based on data instead of hunches.",
+    a: "It takes the slow, expensive parts off your plate (research, first drafts, creative variations, reporting) so more of your budget goes into strategy and testing. In practice that means more experiments each month, faster feedback and decisions based on data instead of hunches.",
   },
   {
     q: "Can you build my website from scratch?",
-    a: "Yes — strategy, design, copy, development and launch, all of it. We build on modern frameworks, make sure the site is fast and search-friendly, and set it up so you can update content yourself without calling a developer every time.",
+    a: "Yes: strategy, design, copy, development and launch, all of it. We build on modern frameworks, make sure the site is fast and search-friendly, and set it up so you can update content yourself without calling a developer every time.",
   },
   {
     q: "Can you create AI advertising videos?",
-    a: "Yes. We pair AI video generation with a human creative director: scripts, voiceover, motion graphics and cuts sized for Meta, TikTok, YouTube and the rest — with a few variations so you can test what lands.",
+    a: "Yes. We pair AI video generation with a human creative director: scripts, voiceover, motion graphics and cuts sized for Meta, TikTok, YouTube and the rest, with a few variations so you can test what lands.",
   },
   {
     q: "Do you work with small businesses?",
-    a: "Definitely. Our Starter plan is made for local and small businesses that need the basics done well — a fast site, local SEO, steady content — without an enterprise-sized invoice.",
+    a: "Definitely. Our Starter plan is made for local and small businesses that need the basics done well (a fast site, local SEO, steady content) without an enterprise-sized invoice.",
   },
   {
     q: "How long does a website take?",
@@ -277,11 +277,11 @@ export const FAQS = [
   },
   {
     q: "Can you manage SEO monthly?",
-    a: "Yes. Ongoing SEO means we keep producing content, watching the technical side and tuning pages, plus a monthly report — with priorities reshuffled around whatever the data says is working.",
+    a: "Yes. Ongoing SEO means we keep producing content, watching the technical side and tuning pages, plus a monthly report, with priorities reshuffled around whatever the data says is working.",
   },
   {
     q: "Can you manage paid advertising?",
-    a: "Yes — Google and Meta, start to finish: strategy, creative, tracking, testing and optimization. And you get straight reporting on what your spend is actually bringing back.",
+    a: "Yes. Google and Meta, start to finish: strategy, creative, tracking, testing and optimization. And you get straight reporting on what your spend is actually bringing back.",
   },
   {
     q: "Can you integrate AI automation?",
@@ -289,6 +289,6 @@ export const FAQS = [
   },
   {
     q: "How do we get started?",
-    a: "Send us a project inquiry through the contact form, or book a strategy call. We'll go through your goals, point out where AI can give you the biggest edge and send a clear proposal — no obligation, no pressure.",
+    a: "Send us a project inquiry through the contact form, or book a strategy call. We'll go through your goals, point out where AI can give you the biggest edge and send a clear proposal. No obligation, no pressure.",
   },
 ] as const;

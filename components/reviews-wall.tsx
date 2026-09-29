@@ -38,7 +38,7 @@ function Empty() {
       <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mut">
         We&apos;re a new agency, so we&apos;d rather leave this honest than fill
         it with words nobody said. Every review here will come from a real
-        client who agreed to share it — the form below is where the first ones
+        client who agreed to share it. The form below is where the first ones
         start.
       </p>
     </div>
@@ -98,7 +98,7 @@ export function ReviewsWall() {
         <SectionHeading
           eyebrow="Reviews"
           title="What people are saying."
-          subtitle="Real words from real clients — published only with their permission. As our first engagements wrap up, their reviews appear here."
+          subtitle="Real words from real clients, published only with their permission. As our first engagements wrap up, their reviews appear here."
         />
 
         <div className="mt-12">

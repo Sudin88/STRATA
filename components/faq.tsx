@@ -86,7 +86,7 @@ export function Faq({ limit }: { limit?: number }) {
           <SectionHeading
             eyebrow="FAQ"
             title="Answers before you ask."
-            subtitle="Everything most clients want to know before a first call. Anything else — just ask."
+            subtitle="Everything most clients want to know before a first call. Anything else? Just ask."
             className="mb-0"
           />
           <Reveal className="space-y-3">

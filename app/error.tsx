@@ -32,7 +32,7 @@ export default function Error({
         <p className="eyebrow mb-5 text-ion">Something broke</p>
         <h1 className="text-heading text-balance">This page hit an error.</h1>
         <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-mut">
-          Sorry about that — it&apos;s on us, not you. Try again, and if it keeps
+          Sorry about that. It&apos;s on us, not you. Try again, and if it keeps
           happening, get in touch and we&apos;ll sort it out.
         </p>
         <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center sm:gap-4">

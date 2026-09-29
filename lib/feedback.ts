@@ -47,6 +47,6 @@ export function validateFeedback(form: FeedbackState): FeedbackErrors {
   if (!Number.isInteger(form.rating) || form.rating < 1 || form.rating > 5)
     errors.rating = "Select a star rating.";
   if (form.feedback.trim().length < 10)
-    errors.feedback = "Tell us a little more — at least a sentence.";
+    errors.feedback = "Tell us a little more, at least a sentence.";
   return errors;
 }

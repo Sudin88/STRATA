@@ -5,7 +5,7 @@ import { SITE } from "@/lib/data";
    injects the resulting URL as og:image / twitter:image automatically. */
 
 export const alt =
-  "Strata — marketing that actually moves your numbers.";
+  "Strata: marketing that actually moves your numbers.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

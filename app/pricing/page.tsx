@@ -8,7 +8,7 @@ import { pageGraph, faqPageSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
 const description =
-  "Three engagement tiers — Starter, Growth and Scale — priced per scope. Tell us what you're building and we'll send a clear proposal.";
+  "Three engagement tiers (Starter, Growth and Scale) priced per scope. Tell us what you're building and we'll send a clear proposal.";
 
 export const metadata = pageMetadata({
   title: "Plans & Pricing",
@@ -33,7 +33,7 @@ export default function PricingPage() {
         breadcrumb="Pricing"
         eyebrow="Plans"
         title="Scoped to your goals, not a price list."
-        description="Every engagement is quoted after we understand what you're building, so you pay for the work that moves your numbers — nothing else. Below is how the tiers differ."
+        description="Every engagement is quoted after we understand what you're building, so you pay for the work that moves your numbers, nothing else. Below is how the tiers differ."
       />
       <Pricing />
       <Faq />

@@ -93,7 +93,7 @@ export function Contact() {
             <SectionHeading
               eyebrow="Contact"
               title="Start the conversation."
-              subtitle="Give us the shape of your project. We reply within one business day with next steps — no pressure, no jargon."
+              subtitle="Give us the shape of your project. We reply within one business day with next steps. No pressure, no jargon."
               className="mb-10"
             />
             <Reveal delay={0.1}>
@@ -135,7 +135,7 @@ export function Contact() {
                 ))}
               </div>
               <p className="mt-6 font-mono text-[10px] tracking-widest text-dim uppercase">
-                Placeholder contact details — updated at launch
+                Placeholder contact details, updated at launch
               </p>
             </Reveal>
           </div>
@@ -269,7 +269,7 @@ export function Contact() {
                 </button>
                 <p aria-live="polite" className="text-sm">
                   {status === "success" && (
-                    <span className="text-ion">Thanks — we&apos;ll be in touch shortly.</span>
+                    <span className="text-ion">Thanks, we&apos;ll be in touch shortly.</span>
                   )}
                   {status === "error" && (
                     <span className="text-warn">Something went wrong. Please try again.</span>

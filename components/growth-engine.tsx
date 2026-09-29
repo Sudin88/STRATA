@@ -87,7 +87,7 @@ export function GrowthEngine() {
           </div>
 
           <p className="mt-10 text-center text-sm text-mut">
-            It works both ways — real performance data keeps re-tuning the
+            It works both ways: real performance data keeps re-tuning the
             strategy, the creative and where the money goes.
           </p>
         </Reveal>

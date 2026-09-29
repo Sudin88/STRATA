@@ -36,7 +36,7 @@ export function Logo({
     <Link
       href="/"
       onClick={onClick}
-      aria-label={`${SITE.name} — home`}
+      aria-label={`${SITE.name} home`}
       className={cn("flex items-center gap-2.5", className)}
     >
       <LogoMark />

@@ -13,7 +13,7 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Plans"
           title="Pick where you want to start."
-          subtitle="We scope every engagement around your goals — so think of these as starting points, not ceilings."
+          subtitle="We scope every engagement around your goals, so think of these as starting points, not ceilings."
           align="center"
         />
 

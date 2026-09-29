@@ -236,7 +236,7 @@ export function FeedbackForm() {
                     className={inputClass}
                     value={form.email}
                     onChange={(e) => set("email", e.target.value)}
-                    placeholder="you@company.com — optional, so we can reply"
+                    placeholder="you@company.com (optional, so we can reply)"
                     autoComplete="email"
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "fb-email-error" : undefined}
@@ -267,7 +267,7 @@ export function FeedbackForm() {
                     className={cn(inputClass, "resize-y")}
                     value={form.feedback}
                     onChange={(e) => set("feedback", e.target.value)}
-                    placeholder="What stood out — good or bad? The more specific, the more useful."
+                    placeholder="What stood out, good or bad? The more specific, the more useful."
                     aria-invalid={!!errors.feedback}
                     aria-describedby={errors.feedback ? "fb-feedback-error" : undefined}
                   />
@@ -300,7 +300,7 @@ export function FeedbackForm() {
                 <p aria-live="polite" className="text-sm">
                   {status === "success" && (
                     <span className="text-ion">
-                      Thank you — we really appreciate you taking the time.
+                      Thank you. We really appreciate you taking the time.
                     </span>
                   )}
                   {status === "error" && (

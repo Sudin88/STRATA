@@ -22,7 +22,7 @@ export function Hero() {
       badge="New agency · senior team"
       title="Marketing that actually moves your"
       highlight="numbers."
-      description="Websites, content, ads, and the systems that tie them together — built with AI so you get more done for less, and run by people who sweat the details."
+      description="Websites, content, ads, and the systems that tie them together, built with AI so you get more done for less, and run by people who sweat the details."
       primaryCta={{ label: "Start Growing", href: "/contact" }}
       secondaryCta={{ label: "Explore Services", href: "/services" }}
       keywords={KEYWORDS}

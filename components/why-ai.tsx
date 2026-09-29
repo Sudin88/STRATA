@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { MoveRight } from "lucide-react";
+import { MoveRight, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
@@ -54,7 +54,7 @@ export function WhyAI() {
               <ul className="space-y-3.5">
                 {TRADITIONAL.map((item) => (
                   <li key={item} className="flex items-center gap-3 text-mut">
-                    <span className="h-px w-4 bg-dim" aria-hidden />
+                    <X className="size-3.5 shrink-0 text-dim" aria-hidden />
                     {item}
                   </li>
                 ))}

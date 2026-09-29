@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 import { pageGraph, serviceCatalogSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
-const title = "AI Marketing Services — SEO, Websites, Ads & Automation";
+const title = "AI Marketing Services: SEO, Websites, Ads & Automation";
 const description =
   "Six connected services: AI SEO and content, website design and development, AI ad videos, social media, paid advertising and marketing automation.";
 
@@ -33,7 +33,7 @@ export default function ServicesPage() {
         breadcrumb="Services"
         eyebrow="Services"
         title="Six services, one connected growth system."
-        description="Most agencies sell you channels one at a time. We connect them — so your site, content, creative and campaigns work together instead of pulling in different directions."
+        description="Most agencies sell you channels one at a time. We connect them, so your site, content, creative and campaigns work together instead of pulling in different directions."
       />
       <Services showHeading={false} />
       <GrowthEngine />

@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 
 const title = "Work";
 const description =
-  "We're a new agency taking on our first clients — no published case studies yet. Real work will appear here with client approval. See how our engagements are structured.";
+  "We're a new agency taking on our first clients, with no published case studies yet. Real work will appear here with client approval. See how our engagements are structured.";
 
 export const metadata = pageMetadata({
   title,
@@ -31,7 +31,7 @@ export default function WorkPage() {
         breadcrumb="Work"
         eyebrow="Work"
         title="How our engagements are structured."
-        description="We'd rather show you honesty than invented case studies. There's no published work here yet — this is where real projects will live, once our first clients approve them for publication."
+        description="We'd rather show you honesty than invented case studies. There's no published work here yet. This is where real projects will live, once our first clients approve them for publication."
       />
       <Work showHeading={false} />
       <Metrics />

@@ -17,7 +17,7 @@ export function About() {
             Most agencies do one thing. We connect all of it.
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-mut sm:text-lg">
-            Most agencies sell you one slice — SEO here, a website there, ads
+            Most agencies sell you one slice: SEO here, a website there, ads
             somewhere else. We do all five under one roof, so your strategy,
             creative, tech and data finally pull in the same direction instead
             of getting lost in handoffs between vendors.

@@ -42,7 +42,7 @@ export function AiDemo() {
         <SectionHeading
           eyebrow="Interactive demo"
           title="See what AI can create."
-          subtitle="A quick, scripted taste of how a plain brief turns into creative direction. The real thing goes a lot deeper — this is just the idea."
+          subtitle="A quick, scripted taste of how a plain brief turns into creative direction. The real thing goes a lot deeper. This is just the idea."
           align="center"
         />
 
@@ -135,7 +135,7 @@ export function AiDemo() {
           </div>
 
           <p className="border-t border-line px-6 py-3 font-mono text-[10px] tracking-widest text-dim uppercase">
-            Frontend demonstration with scripted output — not a live AI call
+            Frontend demonstration with scripted output, not a live AI call
           </p>
         </Reveal>
       </Container>

@@ -31,7 +31,7 @@ export function Metrics() {
           ))}
         </div>
         <p className="mt-10 text-center font-mono text-[10px] tracking-widest text-dim uppercase">
-          How we work, not client results — we report your real numbers once we start working together
+          How we work, not client results. We report your real numbers once we start working together
         </p>
       </Container>
     </section>

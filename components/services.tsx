@@ -24,7 +24,7 @@ export function Services({ limit, showHeading = true, viewAll }: ServicesProps) 
           <SectionHeading
             eyebrow="Services"
             title="Everything you need to grow."
-            subtitle="Strategy, creative, tech and AI — joined up into one system instead of scattered across vendors."
+            subtitle="Strategy, creative, tech and AI, joined up into one system instead of scattered across vendors."
           />
         ) : (
           /* The page hero above owns the visible heading, but the cards are h3 —

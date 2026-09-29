@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 import { pageGraph } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
-const title = "About — Built for the AI Era";
+const title = "About: Built for the AI Era";
 const description =
-  "A small senior team building AI-powered marketing systems for ambitious businesses — strategy, creative, development and growth under one roof.";
+  "A small senior team building AI-powered marketing systems for ambitious businesses: strategy, creative, development and growth under one roof.";
 
 export const metadata = pageMetadata({
   title,
@@ -32,7 +32,7 @@ export default function AboutPage() {
         breadcrumb="About"
         eyebrow="About"
         title="Built for the AI era, run by people."
-        description="AI does the heavy lifting on research, drafting and reporting. Strategy, taste and accountability stay human — that combination is the whole point."
+        description="AI does the heavy lifting on research, drafting and reporting. Strategy, taste and accountability stay human. That combination is the whole point."
       />
       <About />
       <IntelligenceLayer />

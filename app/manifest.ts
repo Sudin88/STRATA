@@ -12,7 +12,7 @@ import { SITE } from "@/lib/data";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${SITE.name} — AI marketing agency`,
+    name: `${SITE.name}: AI marketing agency`,
     short_name: SITE.name,
     description:
       "AI-powered marketing systems: SEO, websites, AI ad videos, social content, paid advertising and automation.",

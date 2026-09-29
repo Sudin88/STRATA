@@ -21,7 +21,7 @@ export default function NotFound() {
         <p className="eyebrow mb-5 text-ion">Error 404</p>
         <h1 className="text-heading text-balance">This page doesn&apos;t exist.</h1>
         <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-mut">
-          The link may be out of date. Here&apos;s the way back — or jump straight
+          The link may be out of date. Here&apos;s the way back, or jump straight
           to any section of the site.
         </p>
         <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center sm:gap-4">

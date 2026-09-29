@@ -54,8 +54,8 @@ export default function PrivacyPage() {
           <p>We only collect what you actively send us through a form:</p>
           <ul>
             <li>
-              <strong>Contact form:</strong> your name, email, and — if you
-              choose to add them — company, website, the service you&apos;re
+              <strong>Contact form:</strong> your name, email, and (if you
+              choose to add them) company, website, the service you&apos;re
               interested in, a budget range, and the project details you write.
             </li>
             <li>

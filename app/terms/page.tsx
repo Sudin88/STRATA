@@ -45,7 +45,7 @@ export default function TermsPage() {
           <p>
             By using this website you agree to these terms. If you don&apos;t
             agree with them, please don&apos;t use the site. These terms cover
-            the website only — any project we take on is governed by a separate
+            the website only. Any project we take on is governed by a separate
             written agreement.
           </p>
         </LegalSection>

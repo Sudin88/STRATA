@@ -24,7 +24,7 @@ function EmptyState() {
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mut">
           Rather than fill this page with invented case studies, we&apos;re
           leaving it honest. Real work will land here as clients approve it for
-          publication — and we&apos;d love for one of them to be you.
+          publication, and we&apos;d love for one of them to be you.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
@@ -63,7 +63,7 @@ export function Work({ limit, showHeading = true, viewAll }: WorkProps) {
           <SectionHeading
             eyebrow="Work"
             title="Work that will speak for itself."
-            subtitle="We're just getting started, so there's nothing to show here yet. As we complete engagements, real case studies — the problem, the system we built, and the results — will be published here with client approval."
+            subtitle="We're just getting started, so there's nothing to show here yet. As we complete engagements, real case studies (the problem, the system we built, and the results) will be published here with client approval."
           />
         ) : (
           /* Keeps the outline from jumping h1 → h3 when the page hero supplies

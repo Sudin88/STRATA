@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 import { pageGraph } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
-const title = "Our Process — Discover, Strategize, Create, Launch, Optimize";
+const title = "Our Process: Discover, Strategize, Create, Launch, Optimize";
 const description =
   "A five-step process for building AI-powered growth systems: discover, strategize, create, launch and continuously optimize with data.";
 

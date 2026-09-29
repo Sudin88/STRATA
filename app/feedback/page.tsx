@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 import { pageGraph } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
-const title = "Feedback — Share Your Experience";
+const title = "Feedback: Share Your Experience";
 const description =
-  "We're a new agency building our reputation the honest way. Share your feedback or first impression — the reviews published here will be real, from real clients.";
+  "We're a new agency building our reputation the honest way. Share your feedback or first impression. The reviews published here will be real, from real clients.";
 
 export const metadata = pageMetadata({
   title,
@@ -31,7 +31,7 @@ export default function FeedbackPage() {
         breadcrumb="Feedback"
         eyebrow="Feedback"
         title="Help shape a new agency."
-        description="We're just getting started, so we'd rather show you honesty than a wall of invented testimonials. There are no reviews here yet — be one of the first to tell us, and the world, how we did."
+        description="We're just getting started, so we'd rather show you honesty than a wall of invented testimonials. There are no reviews here yet. Be one of the first to tell us, and the world, how we did."
       />
       <FeedbackForm />
       <ReviewsWall />
