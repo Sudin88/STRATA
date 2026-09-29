@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Preloader } from "@/components/preloader";
 import { CookieConsent } from "@/components/cookie-consent";
+import { DashboardExitGuard } from "@/components/dashboard/dashboard-exit-guard";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -76,6 +77,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <Footer />
         <CookieConsent />
+        <DashboardExitGuard />
         <JsonLd data={rootGraph(description)} />
       </body>
     </html>

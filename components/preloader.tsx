@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { LogoMark } from "@/components/ui/logo";
 import { SITE } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -21,8 +22,12 @@ export function Preloader() {
   const [progress, setProgress] = useState(6);
   const [done, setDone] = useState(false);
   const [gone, setGone] = useState(false);
+  const pathname = usePathname();
+  // The dashboard is a bare authenticated surface — no first-paint curtain.
+  const onDashboard = pathname.startsWith("/dashboard");
 
   useEffect(() => {
+    if (onDashboard) return;
     /*
      * The curtain itself is `display: none` under reduced motion, so here we
      * only skip the parts that would still be felt: the scroll lock, the
@@ -77,9 +82,9 @@ export function Preloader() {
       window.removeEventListener("load", finish);
       document.body.style.overflow = "";
     };
-  }, []);
+  }, [onDashboard]);
 
-  if (gone) return null;
+  if (onDashboard || gone) return null;
 
   return (
     <div

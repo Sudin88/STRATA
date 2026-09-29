@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { Cookie } from "lucide-react";
 import Link from "next/link";
@@ -61,9 +62,12 @@ export function CookieConsent() {
     readConsent,
     () => null, // server snapshot: always undecided
   );
+  const pathname = usePathname();
 
   // Nothing renders (no banner, no GA) unless a measurement ID is configured.
   if (!isAnalyticsConfigured || !GA_ID) return null;
+  // The dashboard is a bare authenticated surface — no marketing chrome.
+  if (pathname.startsWith("/dashboard")) return null;
 
   const loadGa = choice === "granted";
 

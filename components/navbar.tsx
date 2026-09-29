@@ -52,6 +52,9 @@ export function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // The dashboard is a bare authenticated surface — no marketing chrome.
+  if (pathname.startsWith("/dashboard")) return null;
+
   return (
     <header
       className={cn(

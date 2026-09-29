@@ -38,6 +38,11 @@ vi.mock("next/script", () => ({
   ),
 }));
 
+// The banner is hidden on /dashboard; these tests exercise a marketing route.
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/",
+}));
+
 /* next/link needs no router context here — render a bare anchor. */
 vi.mock("next/link", () => ({
   default: ({

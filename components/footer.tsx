@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SITE, NAV_LINKS, SERVICES } from "@/lib/data";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
@@ -43,7 +46,11 @@ function FooterColumn({
 }
 
 export function Footer() {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+
+  // The dashboard is a bare authenticated surface — no marketing chrome.
+  if (pathname.startsWith("/dashboard")) return null;
 
   return (
     <footer className="border-t border-line bg-ink">
