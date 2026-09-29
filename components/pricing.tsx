@@ -63,6 +63,14 @@ export function Pricing() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal>
+          <p className="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-dim">
+            What shapes your quote: how many channels you want live, how much is
+            one-time build versus ongoing work, and how fast you want to move.
+            Tell us on a quick call and we&apos;ll send a clear, itemized proposal.
+          </p>
+        </Reveal>
       </Container>
     </section>
   );

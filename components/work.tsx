@@ -17,14 +17,15 @@ function EmptyState() {
   return (
     <Reveal>
       <div className="hairline rounded-card border border-line bg-surface p-10 text-center sm:p-14">
-        <p className="eyebrow mb-4">No projects published yet</p>
+        <p className="eyebrow mb-4">Case studies coming soon</p>
         <h3 className="mx-auto max-w-xl text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
           We&apos;re a new agency taking on our first clients.
         </h3>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-mut">
           Rather than fill this page with invented case studies, we&apos;re
-          leaving it honest. Real work will land here as clients approve it for
-          publication, and we&apos;d love for one of them to be you.
+          keeping it honest. As our first engagements wrap and clients sign off,
+          the real work lands right here: the problem, the system we built and
+          the numbers behind it. We&apos;d like one of them to be yours.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
