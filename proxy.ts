@@ -41,6 +41,61 @@ export function dashboardIpAllowed(request: NextRequest): boolean {
   return allow.some((entry) => ipMatches(entry, ip));
 }
 
+/*
+ * Optional secret-path cloak. When DASHBOARD_ACCESS_KEY is set, the whole
+ * dashboard (login included) is invisible until a browser unlocks it once with
+ * `…/dashboard?key=<KEY>`. A correct key drops an httpOnly `dash_key` cookie and
+ * redirects to the clean URL; every later request rides that cookie. Anyone
+ * without a matching key or cookie gets a bare 404 — the panel reads as
+ * nonexistent to scanners. Reachable from ANY network (unlike the IP gate): a
+ * new device just needs the unlock link once.
+ *
+ * The key lives only in the env var (never the repo — the GitHub repo is public
+ * — and never the client bundle, since proxy runs server-side). Leave the var
+ * UNSET to disable the gate (fail-open). Rotating the value in Vercel instantly
+ * locks every browser out until they re-unlock.
+ */
+type AccessDecision = "disabled" | "unlock" | "allow" | "hide";
+
+export function accessDecision(
+  key: string | undefined,
+  provided: string | null,
+  cookie: string | undefined,
+): AccessDecision {
+  const k = key?.trim();
+  if (!k) return "disabled"; // no key configured — gate off
+  if (provided && provided === k) return "unlock"; // correct ?key= → set cookie
+  if (cookie && cookie === k) return "allow"; // already unlocked on this browser
+  return "hide"; // no/wrong key → 404
+}
+
+// Returns a response to send when the access gate intercepts (redirect-with-
+// cookie on unlock, 404 when hidden), or null to let the request continue.
+export function dashboardAccessGate(request: NextRequest): NextResponse | null {
+  const key = process.env.DASHBOARD_ACCESS_KEY;
+  const provided = request.nextUrl.searchParams.get("key");
+  const cookie = request.cookies.get("dash_key")?.value;
+  const decision = accessDecision(key, provided, cookie);
+
+  if (decision === "disabled" || decision === "allow") return null;
+
+  if (decision === "unlock") {
+    const url = request.nextUrl.clone();
+    url.searchParams.delete("key"); // strip the secret from the visible URL
+    const res = NextResponse.redirect(url);
+    res.cookies.set("dash_key", key!.trim(), {
+      path: "/dashboard",
+      httpOnly: true, // JS can't read it; only travels back to the server
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60 * 24 * 90, // 90 days
+    });
+    return res;
+  }
+
+  return new NextResponse("This page could not be found.", { status: 404 });
+}
+
 type ParsedIp = { version: 4 | 6; bytes: number[] };
 
 function parseIp(ip: string): ParsedIp | null {
@@ -149,6 +204,10 @@ export async function proxy(request: NextRequest) {
   if (!dashboardIpAllowed(request)) {
     return new NextResponse("This page could not be found.", { status: 404 });
   }
+
+  // Secret-path cloak: hide the dashboard behind an unguessable key, if set.
+  const gated = dashboardAccessGate(request);
+  if (gated) return gated;
 
   const { response, user } = await updateSession(request);
   const { pathname } = request.nextUrl;
