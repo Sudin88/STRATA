@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Strata",
   tagline: "AI on the busywork. People on the decisions that matter.",
-  url: "https://strata-ai.net",
+  url: "https://strata-agency.me",
   email: "strata.agency.co@gmail.com",
   phone: "+977 9769684556",
   location: "Kathmandu, Nepal. Working worldwide",
