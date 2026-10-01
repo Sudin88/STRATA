@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE, ROUTES } from "@/lib/data";
+import { POSTS } from "@/lib/blog";
 
 /* Legal pages are indexable but low-priority — kept out of ROUTES so they
    never leak into primary navigation. */
@@ -15,6 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "/" ? 1 : route === "/contact" ? 0.9 : 0.8,
   }));
 
+  const posts = POSTS.map((post) => ({
+    url: `${SITE.url}/blog/${post.slug}`,
+    lastModified: new Date(post.updated ?? post.published),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   const legal = LEGAL_ROUTES.map((route) => ({
     url: `${SITE.url}${route}`,
     lastModified,
@@ -22,5 +30,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   }));
 
-  return [...marketing, ...legal];
+  return [...marketing, ...posts, ...legal];
 }

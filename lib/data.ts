@@ -15,13 +15,14 @@ export const NAV_LINKS = [
   { label: "Process", href: "/process" },
   { label: "Pricing", href: "/pricing" },
   { label: "Work", href: "/work" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Feedback", href: "/feedback" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 /** Every indexable route, used by the navbar, footer and sitemap. */
-export const ROUTES = ["/", "/services", "/process", "/pricing", "/work", "/about", "/feedback", "/contact"] as const;
+export const ROUTES = ["/", "/services", "/process", "/pricing", "/work", "/blog", "/about", "/feedback", "/contact"] as const;
 
 /**
  * Icon is stored as a key, not a component, so service data stays

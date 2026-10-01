@@ -13,6 +13,7 @@ const SERVICE_LINKS = SERVICES.map((s) => ({
 }));
 
 const RESOURCE_LINKS = [
+  { label: "Blog", href: "/blog" },
   { label: "Our Process", href: "/process" },
   { label: "Share Feedback", href: "/feedback" },
   { label: "Plans & Pricing", href: "/pricing" },

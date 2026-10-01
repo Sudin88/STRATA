@@ -1,4 +1,5 @@
 import { SITE, SERVICES, NAV_LINKS } from "@/lib/data";
+import type { Post, PostMeta } from "@/lib/blog";
 
 /**
  * schema.org JSON-LD builders. Centralized so every page emits structured data
@@ -170,4 +171,92 @@ export function pageGraph({
       ...extra,
     ],
   };
+}
+
+/**
+ * Blog node for the /blog listing. Lists each published post as a BlogPosting
+ * summary, all authored and published by the brand entity (@id). Passed to
+ * pageGraph via `extra` so the listing is a CollectionPage that owns a Blog.
+ */
+export function blogListingSchema(posts: readonly PostMeta[]): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${SITE.url}/blog/#blog`,
+    name: `${SITE.name} Blog`,
+    description:
+      "Honest, practical writing on AI marketing, SEO, websites and advertising.",
+    url: abs("/blog"),
+    publisher: { "@id": ORG_ID },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.heading,
+      url: abs(`/blog/${p.slug}`),
+      datePublished: p.published,
+      dateModified: p.updated ?? p.published,
+      author: { "@id": ORG_ID },
+    })),
+  };
+}
+
+/**
+ * Full graph for a single article: the BlogPosting, its WebPage, a 3-level
+ * breadcrumb (Home / Blog / post) and — when the post defines FAQs — a FAQPage.
+ * Author and publisher are the Strata organization entity, not an invented
+ * person, so nothing here fabricates a byline or credentials.
+ */
+export function blogPostGraph(post: Post): Json {
+  const url = abs(`/blog/${post.slug}`);
+  const graph: Json[] = [
+    {
+      "@type": "BlogPosting",
+      "@id": `${url}/#article`,
+      headline: post.heading,
+      description: post.description,
+      datePublished: post.published,
+      dateModified: post.updated ?? post.published,
+      url,
+      mainEntityOfPage: { "@id": `${url}/#webpage` },
+      author: { "@id": ORG_ID },
+      publisher: { "@id": ORG_ID },
+      image: `${SITE.url}/opengraph-image`,
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": ORG_ID },
+      keywords: post.keyword,
+      inLanguage: "en",
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${url}/#webpage`,
+      url,
+      name: post.title,
+      description: post.description,
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": ORG_ID },
+      breadcrumb: { "@id": `${url}/#breadcrumb` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${url}/#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+        { "@type": "ListItem", position: 2, name: "Blog", item: abs("/blog") },
+        { "@type": "ListItem", position: 3, name: post.heading, item: url },
+      ],
+    },
+  ];
+
+  if (post.faqs?.length) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${url}/#faq`,
+      mainEntity: post.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }
+
+  return { "@context": "https://schema.org", "@graph": graph };
 }

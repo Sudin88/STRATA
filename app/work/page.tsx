@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 import { pageGraph } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
-const title = "Work";
+const title = "Our Work & How We Engage";
 const description =
   "We're a new agency taking on our first clients, with no published case studies yet. Real work will appear here with client approval. See how our engagements are structured.";
 
