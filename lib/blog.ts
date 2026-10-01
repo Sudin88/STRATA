@@ -1,6 +1,8 @@
 import type { ComponentType } from "react";
 import * as aiSeo from "@/content/blog/ai-seo";
 import * as geo from "@/content/blog/generative-engine-optimization";
+import * as aiAdVideos from "@/content/blog/ai-ad-videos";
+import * as googleAiContent from "@/content/blog/does-google-penalize-ai-content";
 
 /**
  * Blog registry. Each post is a module under content/blog/ that exports a
@@ -44,7 +46,7 @@ export interface Post extends PostMeta {
 }
 
 /** Every published post module. Add new posts here. */
-const modules: { meta: PostMeta; default: ComponentType }[] = [geo, aiSeo];
+const modules: { meta: PostMeta; default: ComponentType }[] = [googleAiContent, aiAdVideos, geo, aiSeo];
 
 /** Posts, newest first. */
 export const POSTS: Post[] = modules
