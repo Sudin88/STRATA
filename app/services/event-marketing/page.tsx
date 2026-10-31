@@ -9,9 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 import { pageGraph, serviceOfferSchema, faqPageSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
-const title = "Event & Experiential Marketing: SEO, Ads, Social & Video";
+const title = "Event Marketing for Small Business: SEO, Ads, Social & Recaps";
 const description =
-  "We market live, virtual and hybrid events: event SEO and landing pages, ticket campaigns, social rollouts, recap videos and post-event reporting — one campaign before, during and after.";
+  "Event marketing for conferences, trade shows, launches and hybrid events: event SEO and landing pages, ticket campaigns, social rollouts, recap videos and post-event reporting.";
 
 const SERVICE_NAME = "Event & Experiential Marketing";
 
@@ -145,7 +145,7 @@ export default function EventMarketingPage() {
           breadcrumb: "Event Marketing",
           parent: { name: "Services", path: "/services" },
           extra: [
-            serviceOfferSchema("/services/event-marketing", SERVICE_NAME, description),
+            serviceOfferSchema("/services/event-marketing", SERVICE_NAME, description, "Event Marketing"),
             faqPageSchema(FAQS),
           ],
         })}
@@ -190,7 +190,13 @@ export default function EventMarketingPage() {
               SEO, paid, social, video — pointed at a date on a calendar and a
               number of seats to fill. Your production team builds the stage.
               We make sure the room is full, the room knows why, and the work
-              keeps returning value after the lights go down.
+              keeps returning value after the lights go down. Where the centre
+              of gravity is a brand moment rather than a calendar — pop-ups,
+              retail takeovers, sponsorships — that&apos;s our{" "}
+              <Link href="/services/experiential-marketing">
+                experiential marketing
+              </Link>{" "}
+              practice, on its own page.
             </p>
           </Reveal>
         </Container>
@@ -330,6 +336,36 @@ export default function EventMarketingPage() {
                 <p className="mt-3 text-sm leading-relaxed text-mut">
                   How AI-assisted video production makes testing event creative
                   cheap — and why the human edit is still what makes it work.
+                </p>
+              </Link>
+            </Reveal>
+            <Reveal delay={0.16} className="h-full">
+              <Link
+                href="/blog/event-measurement-roi"
+                className="group block h-full rounded-2xl border border-line p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-ion/50 hover:bg-ion-soft sm:p-8"
+              >
+                <p className="eyebrow mb-3 text-ion">Event marketing ROI</p>
+                <h3 className="text-lg font-bold text-fg sm:text-xl">
+                  Deciding whether the event paid off — before it runs
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-mut">
+                  The measurement chain that keeps post-event reports from
+                  flattering themselves.
+                </p>
+              </Link>
+            </Reveal>
+            <Reveal delay={0.24} className="h-full">
+              <Link
+                href="/blog/virtual-event-strategy"
+                className="group block h-full rounded-2xl border border-line p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-ion/50 hover:bg-ion-soft sm:p-8"
+              >
+                <p className="eyebrow mb-3 text-ion">Virtual events</p>
+                <h3 className="text-lg font-bold text-fg sm:text-xl">
+                  Running virtual events people actually join
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-mut">
+                  Platform choice for the job, registration pages that convert,
+                  and the list that outlives the stream.
                 </p>
               </Link>
             </Reveal>

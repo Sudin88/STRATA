@@ -21,8 +21,9 @@ export const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-/** Every indexable route, used by the navbar, footer and sitemap. */
-export const ROUTES = ["/", "/services", "/process", "/pricing", "/work", "/blog", "/about", "/feedback", "/contact"] as const;
+/** Routeable content pages, used by the sitemap. Primary nav comes from
+    NAV_LINKS; utility pages (/feedback) are deliberately excluded here. */
+export const ROUTES = ["/", "/services", "/process", "/pricing", "/work", "/blog", "/about", "/contact"] as const;
 
 /**
  * Icon is stored as a key, not a component, so service data stays

@@ -3,7 +3,7 @@ import type { PostMeta } from "@/lib/blog";
 
 export const meta: PostMeta = {
   slug: "legal-firm-events",
-  title: "Law Firm Events: Marketing That Respects the Rules",
+  title: "Law Firm Event Marketing That Respects the Rules",
   heading: "For a law firm, the event is the demonstration.",
   description:
     "Client briefings, sector roundtables, partner receptions and alumni evenings run inside professional-conduct rules — the formats that suit a firm and how to measure a relationship pipeline.",

@@ -1,14 +1,16 @@
 import type { MetadataRoute } from "next";
 import { SITE, ROUTES } from "@/lib/data";
 import { POSTS } from "@/lib/blog";
+import { NEWS } from "@/lib/news";
 
 /* Legal pages are indexable but low-priority — kept out of ROUTES so they
    never leak into primary navigation. */
 const LEGAL_ROUTES = ["/privacy", "/terms"] as const;
 
 /* Service sections and detail pages linked beneath the primary nav rather
-   than joining ROUTES. */
-const FOOTER_ROUTES = ["/news"] as const;
+   than joining ROUTES. /news only joins when there is news to show — an
+   empty page in the sitemap is thin content. */
+const FOOTER_ROUTES: readonly string[] = NEWS.length > 0 ? ["/news"] : [];
 const SERVICE_DETAIL_ROUTES = [
   "/services/event-marketing",
   "/services/experiential-marketing",
@@ -16,8 +18,14 @@ const SERVICE_DETAIL_ROUTES = [
   "/services/experience-design",
 ] as const;
 
+/* Real last-updated date for static pages. Bump when page copy changes;
+   blog posts carry their own updated/published dates. Build-time `new
+   Date()` stamps every URL identically on every deploy, which makes
+   lastmod meaningless to crawlers. */
+const LAST_CONTENT_SYNC = "2026-10-31" as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const lastModified = new Date(LAST_CONTENT_SYNC);
 
   const marketing = ROUTES.map((route) => ({
     url: `${SITE.url}${route === "/" ? "" : route}`,

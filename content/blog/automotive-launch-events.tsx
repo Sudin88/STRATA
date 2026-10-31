@@ -130,8 +130,10 @@ export default function Body() {
       </p>
 
       <p>
-        If your launch calendar has a date and the marketing plan is still one
-        reveal film and wishful thinking,{" "}
+        The sequencing, the residue and the dealer work above are what we run
+        as <Link href="/services/event-marketing">event marketing at launch
+        scale</Link>. If your launch calendar has a date and the marketing
+        plan is still one reveal film and wishful thinking,{" "}
         <Link href="/contact">tell us what you&apos;re launching</Link>. We&apos;ll
         show you which audiences your plan covers and which ones it&apos;s
         about to leave out.

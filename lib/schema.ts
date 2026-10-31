@@ -160,14 +160,15 @@ export function serviceCatalogSchema(): Json {
 export function serviceOfferSchema(
   path: string,
   name: string,
-  description: string
+  description: string,
+  serviceType?: string
 ): Json {
   return {
     "@type": "Service",
     "@id": `${abs(path)}/#service`,
     name,
     description,
-    serviceType: name,
+    serviceType: serviceType ?? "Digital Marketing",
     url: abs(path),
     provider: { "@id": ORG_ID },
     areaServed: "Worldwide",

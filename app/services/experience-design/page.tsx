@@ -125,7 +125,7 @@ export default function ExperienceDesignPage() {
           breadcrumb: "Experience Design",
           parent: { name: "Services", path: "/services" },
           extra: [
-            serviceOfferSchema("/services/experience-design", SERVICE_NAME, description),
+            serviceOfferSchema("/services/experience-design", SERVICE_NAME, description, "Digital Experience Design"),
             faqPageSchema(FAQS),
           ],
         })}
@@ -176,7 +176,12 @@ export default function ExperienceDesignPage() {
               that created them is over. If you need the always-on site
               rebuilt, that&apos;s our{" "}
               <Link href="/services">website service</Link>; this page is the
-              faster, sharper sibling.
+              faster, sharper sibling. And where each step needs saying,
+              the words inherit our{" "}
+              <Link href="/services/creative-communications">
+                messaging and copy practice
+              </Link>
+              .
             </p>
           </Reveal>
         </Container>

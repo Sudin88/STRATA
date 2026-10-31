@@ -138,8 +138,11 @@ export default function Body() {
           creative and communications craft
         </Link>{" "}
         that plans around clearance, and process discipline that keeps
-        approvals from strangling the timeline. If that division of labour
-        matches how your team works,{" "}
+        approvals from strangling the timeline. The underlying event plan is
+        the one described on our{" "}
+        <Link href="/services/event-marketing">event marketing page</Link> —
+        the compliance fence changes its timing, not its shape. If that
+        division of labour matches how your team works,{" "}
         <Link href="/contact">tell us about the upcoming congress or launch</Link>{" "}
         and we&apos;ll show you exactly how we&apos;d run the marketing layer.
       </p>

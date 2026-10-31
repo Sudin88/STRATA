@@ -3,7 +3,7 @@ import type { PostMeta } from "@/lib/blog";
 
 export const meta: PostMeta = {
   slug: "popup-events-activations",
-  title: "Pop-ups & Activations: A Small-Budget Marketing Playbook",
+  title: "Pop-up Marketing & Activations: A Small-Budget Playbook",
   heading: "A pop-up is a concentrated test of your marketing.",
   description:
     "Marketing a pop-up or activation on a small budget: one page that ranks for local intent, one paid channel, capture at the door and a recap built from a capture plan, not leftovers.",

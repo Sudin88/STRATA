@@ -125,7 +125,7 @@ export default function ExperientialMarketingPage() {
           breadcrumb: "Experiential Marketing",
           parent: { name: "Services", path: "/services" },
           extra: [
-            serviceOfferSchema("/services/experiential-marketing", SERVICE_NAME, description),
+            serviceOfferSchema("/services/experiential-marketing", SERVICE_NAME, description, "Experiential Marketing"),
             faqPageSchema(FAQS),
           ],
         })}

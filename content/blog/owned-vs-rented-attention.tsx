@@ -3,7 +3,7 @@ import type { PostMeta } from "@/lib/blog";
 
 export const meta: PostMeta = {
   slug: "owned-vs-rented-attention",
-  title: "Owned vs Rented Attention: The Marketing Math Small Businesses Miss",
+  title: "Owned vs Rented Attention: The Math Small Businesses Miss",
   heading: "You're renting your audience. That's the real problem.",
   description:
     "Ads disappear the month you stop paying; rankings, content and an email list keep working. Rented vs owned attention, what each actually costs, and how to use one to build the other.",

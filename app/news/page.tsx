@@ -7,16 +7,23 @@ import { formatPostDate } from "@/lib/blog-format";
 import { pageMetadata } from "@/lib/seo";
 import { pageGraph } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
+import type { Metadata } from "next";
 
 const title = "Company News, Announcements & Press";
 const description =
   "Real updates from Strata: capabilities shipped, projects signed off, public appearances — published only when there's something worth saying.";
 
-export const metadata = pageMetadata({
-  title,
-  description,
-  path: "/news",
-});
+/* Noindex while the newsroom is empty — an honest empty state is poor
+   search content. Flip back on in sync with the first real entry (see
+   the FOOTER_ROUTES condition in app/sitemap.ts). */
+export const metadata: Metadata = {
+  ...pageMetadata({
+    title,
+    description,
+    path: "/news",
+  }),
+  robots: NEWS.length === 0 ? { index: false, follow: true } : undefined,
+};
 
 export default function NewsPage() {
   return (

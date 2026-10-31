@@ -3,7 +3,7 @@ import type { PostMeta } from "@/lib/blog";
 
 export const meta: PostMeta = {
   slug: "employee-events-recognition",
-  title: "Employee Events & Recognition: The Audience on the Payroll",
+  title: "Employee Recognition Events: The Audience on the Payroll",
   heading: "Companies court strangers with more care than their own people.",
   description:
     "Town halls, award nights, anniversaries and offsites run with the same discipline as client-facing events — plus recognition that lands because it's specific, timely and earned.",

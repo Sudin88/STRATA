@@ -11,7 +11,7 @@ const description =
   "Three engagement tiers (Starter, Growth and Scale) priced per scope. Tell us what you're building and we'll send a clear proposal.";
 
 export const metadata = pageMetadata({
-  title: "Plans & Pricing",
+  title: "Marketing Agency Pricing: Starter, Growth & Scale Plans",
   description,
   path: "/pricing",
 });

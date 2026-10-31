@@ -3,7 +3,7 @@ import type { PostMeta } from "@/lib/blog";
 
 export const meta: PostMeta = {
   slug: "event-marketing-trends",
-  title: "Event Marketing Trends: Six Shifts to Build For",
+  title: "Event Marketing Trends for 2026: Six Shifts to Build For",
   heading: "Event marketing is changing. Six shifts decide who fills the room.",
   description:
     "The event marketing shifts we're building for: hybrid as default, first-party data over badge scans, recap content economics and measurement that survives past the last day.",

@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 import { pageGraph, serviceOfferSchema, faqPageSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/json-ld";
 
-const title = "Creative & Communications: Messaging, Copy & Campaign Craft";
+const title = "Messaging, Positioning & Copywriting: Creative & Communications";
 const description =
   "Messaging and positioning, campaign concepts, copywriting and communications calendars — the words and ideas that make every channel worth listening to, kept honest to what the business can deliver.";
 
@@ -121,7 +121,7 @@ export default function CreativeCommunicationsPage() {
           breadcrumb: "Creative & Communications",
           parent: { name: "Services", path: "/services" },
           extra: [
-            serviceOfferSchema("/services/creative-communications", SERVICE_NAME, description),
+            serviceOfferSchema("/services/creative-communications", SERVICE_NAME, description, "Marketing Communications"),
             faqPageSchema(FAQS),
           ],
         })}
@@ -168,6 +168,12 @@ export default function CreativeCommunicationsPage() {
               seriously enough to do the unglamorous work: message testing,
               ruthless editing, version control across channels, and reporting
               that shows which words actually moved anyone.
+            </p>
+            <p className="mt-5 leading-relaxed text-mut">
+              When the words are ready to live in an interface — landing
+              pages, email journeys, campaign microsites — that&apos;s our{" "}
+              <Link href="/services/experience-design">experience design</Link>{" "}
+              practice: the same voice, built rather than written.
             </p>
           </Reveal>
         </Container>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { ReviewsWall } from "@/components/reviews-wall";
 import { FeedbackForm } from "@/components/feedback-form";
@@ -10,11 +11,15 @@ const title = "Feedback: Share Your Experience";
 const description =
   "We're a new agency building our reputation the honest way. Share your feedback or first impression. The reviews published here will be real, from real clients.";
 
-export const metadata = pageMetadata({
-  title,
-  description,
-  path: "/feedback",
-});
+/* A conversion utility, not search content: indexable nothing here yet. */
+export const metadata: Metadata = {
+  ...pageMetadata({
+    title,
+    description,
+    path: "/feedback",
+  }),
+  robots: { index: false, follow: true },
+};
 
 export default function FeedbackPage() {
   return (
