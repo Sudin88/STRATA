@@ -14,6 +14,7 @@ import * as popupEventsActivations from "@/content/blog/popup-events-activations
 import * as employeeEventsRecognition from "@/content/blog/employee-events-recognition";
 import * as legalFirmEvents from "@/content/blog/legal-firm-events";
 import * as agencyCaseStudies from "@/content/blog/agency-case-studies";
+import * as eventMarketingForSmallBusiness from "@/content/blog/event-marketing-for-small-business";
 
 /**
  * Blog registry. Each post is a module under content/blog/ that exports a
@@ -69,6 +70,7 @@ const modules: { meta: PostMeta; default: ComponentType }[] = [
   employeeEventsRecognition,
   legalFirmEvents,
   agencyCaseStudies,
+  eventMarketingForSmallBusiness,
   googleAiContent,
   aiAdVideos,
   geo,

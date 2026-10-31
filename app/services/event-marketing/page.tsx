@@ -198,6 +198,14 @@ export default function EventMarketingPage() {
               </Link>{" "}
               practice, on its own page.
             </p>
+            <p className="mt-5 leading-relaxed text-mut">
+              Want the working version of the plan? Our{" "}
+              <Link href="/services/event-marketing/checklist">
+                event marketing checklist
+              </Link>{" "}
+              walks the before, during and after in order — usable whether we
+              run the campaign or your own team does.
+            </p>
           </Reveal>
         </Container>
       </section>

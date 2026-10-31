@@ -18,6 +18,16 @@ const SERVICE_DETAIL_ROUTES = [
   "/services/experience-design",
 ] as const;
 
+/* Standalone comparison page — a money-adjacent decision page. */
+const COMPARE_ROUTES = [
+  "/compare/ai-marketing-agency-vs-traditional-agency",
+] as const;
+
+/* Deeper utilities under a service detail page. */
+const SERVICE_TOOL_ROUTES = [
+  "/services/event-marketing/checklist",
+] as const;
+
 /* Real last-updated date for static pages. Bump when page copy changes;
    blog posts carry their own updated/published dates. Build-time `new
    Date()` stamps every URL identically on every deploy, which makes
@@ -55,6 +65,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const comparisons = COMPARE_ROUTES.map((route) => ({
+    url: `${SITE.url}${route}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  const serviceTools = SERVICE_TOOL_ROUTES.map((route) => ({
+    url: `${SITE.url}${route}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   const legal = LEGAL_ROUTES.map((route) => ({
     url: `${SITE.url}${route}`,
     lastModified,
@@ -62,5 +86,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   }));
 
-  return [...marketing, ...serviceDetails, ...news, ...posts, ...legal];
+  return [...marketing, ...serviceDetails, ...serviceTools, ...comparisons, ...news, ...posts, ...legal];
 }
