@@ -88,16 +88,33 @@ export function rootGraph(description: string): Json {
 
 /**
  * BreadcrumbList for an interior page. The trail always starts at Home, matching
- * the visible breadcrumb in PageHero, so the markup and the UI agree.
+ * the visible breadcrumb, so the markup and the UI agree. Detail pages nested
+ * under a section (e.g. /services/event-marketing) pass a `parent` to match
+ * their three-level Home > Section > Detail trail.
  */
-function breadcrumbNode(breadcrumb: string, path: string): Json {
-  return {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
-      { "@type": "ListItem", position: 2, name: breadcrumb, item: abs(path) },
-    ],
-  };
+function breadcrumbNode(
+  breadcrumb: string,
+  path: string,
+  parent?: { name: string; path: string }
+): Json {
+  const items: Json[] = [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+  ];
+  if (parent) {
+    items.push({
+      "@type": "ListItem",
+      position: 2,
+      name: parent.name,
+      item: abs(parent.path),
+    });
+  }
+  items.push({
+    "@type": "ListItem",
+    position: parent ? 3 : 2,
+    name: breadcrumb,
+    item: abs(path),
+  });
+  return { "@type": "BreadcrumbList", itemListElement: items };
 }
 
 /** FAQPage from real Q&A copy. Emit only the entries actually shown on the page. */
@@ -135,6 +152,29 @@ export function serviceCatalogSchema(): Json {
 }
 
 /**
+ * Service node for a dedicated service detail page: the specific service the
+ * page offers, provider-linked to the brand entity so it resolves as a leaf of
+ * the OfferCatalog published on /services. Pass the page's route, service name
+ * and the page description.
+ */
+export function serviceOfferSchema(
+  path: string,
+  name: string,
+  description: string
+): Json {
+  return {
+    "@type": "Service",
+    "@id": `${abs(path)}/#service`,
+    name,
+    description,
+    serviceType: name,
+    url: abs(path),
+    provider: { "@id": ORG_ID },
+    areaServed: "Worldwide",
+  };
+}
+
+/**
  * Standard graph for an interior page: a WebPage node linked to the site and the
  * brand, its breadcrumb trail, and any page-specific nodes (FAQPage, catalog…)
  * passed in via `extra`. Rendered once per page with <JsonLd>.
@@ -145,6 +185,7 @@ export function pageGraph({
   description,
   breadcrumb,
   type = "WebPage",
+  parent,
   extra = [],
 }: {
   path: string;
@@ -153,6 +194,8 @@ export function pageGraph({
   breadcrumb: string;
   /** A more specific WebPage subtype (e.g. AboutPage, ContactPage) when it fits. */
   type?: string;
+  /** Section the page sits under, e.g. Services for its detail pages. */
+  parent?: { name: string; path: string };
   extra?: Json[];
 }): Json {
   return {
@@ -166,7 +209,7 @@ export function pageGraph({
         description,
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": ORG_ID },
-        breadcrumb: breadcrumbNode(breadcrumb, path),
+        breadcrumb: breadcrumbNode(breadcrumb, path, parent),
       },
       ...extra,
     ],

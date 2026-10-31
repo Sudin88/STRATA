@@ -36,7 +36,8 @@ export type ServiceIconKey =
   | "motion"
   | "social"
   | "ads"
-  | "automation";
+  | "automation"
+  | "event";
 
 export interface Service {
   id: ServiceIconKey;
@@ -45,6 +46,8 @@ export interface Service {
   description: string;
   features: string[];
   cta: string;
+  /** Deep link when the service has a dedicated page — else cards point at /contact. */
+  ctaHref?: string;
   /** Listed for interest but not yet deliverable — shown as "Coming soon". */
   comingSoon?: boolean;
 }
@@ -174,6 +177,25 @@ export const SERVICES: Service[] = [
     cta: "Automate My Growth",
     comingSoon: true,
   },
+  {
+    id: "event",
+    index: "S.08",
+    title: "Event & Experiential Marketing",
+    description:
+      "We don't produce events — we fill them and make them pay off. The pages that rank for your event, the ads that sell tickets, the social that carries the room and the recap video that keeps working after the doors close.",
+    features: [
+      "Event SEO & landing pages",
+      "Ticket & booking campaigns",
+      "Virtual & hybrid event marketing",
+      "Social media rollouts",
+      "Event recap videos",
+      "Motion graphics packages",
+      "Exhibitor & sponsor promotion",
+      "Post-event content & reporting",
+    ],
+    cta: "Market My Event",
+    ctaHref: "/services/event-marketing",
+  },
 ];
 
 interface Project {
@@ -275,7 +297,7 @@ export const PRICING: PricingTier[] = [
 export const FAQS = [
   {
     q: "What services do you offer?",
-    a: "Seven, really: AI-assisted SEO and content, website design and development, AI ad videos, motion graphics, social media and paid advertising, with AI marketing automation coming soon. The point is they work together as one engagement, not separate projects that never talk to each other.",
+    a: "Eight, really: AI-assisted SEO and content, website design and development, AI ad videos, motion graphics, social media, paid advertising and event & experiential marketing — with AI marketing automation coming soon. The point is they work together as one engagement, not separate projects that never talk to each other.",
   },
   {
     q: "How does AI improve marketing?",

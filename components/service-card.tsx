@@ -110,7 +110,7 @@ export function ServiceCard({ service }: { service: Service }) {
         </span>
       ) : (
         <Link
-          href="/contact"
+          href={service.ctaHref ?? "/contact"}
           className="relative mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold text-fg transition-colors hover:text-ion"
         >
           {service.cta}

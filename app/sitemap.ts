@@ -6,6 +6,16 @@ import { POSTS } from "@/lib/blog";
    never leak into primary navigation. */
 const LEGAL_ROUTES = ["/privacy", "/terms"] as const;
 
+/* Service sections and detail pages linked beneath the primary nav rather
+   than joining ROUTES. */
+const FOOTER_ROUTES = ["/news"] as const;
+const SERVICE_DETAIL_ROUTES = [
+  "/services/event-marketing",
+  "/services/experiential-marketing",
+  "/services/creative-communications",
+  "/services/experience-design",
+] as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
@@ -23,6 +33,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const news = FOOTER_ROUTES.map((route) => ({
+    url: `${SITE.url}${route}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  const serviceDetails = SERVICE_DETAIL_ROUTES.map((route) => ({
+    url: `${SITE.url}${route}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const legal = LEGAL_ROUTES.map((route) => ({
     url: `${SITE.url}${route}`,
     lastModified,
@@ -30,5 +54,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   }));
 
-  return [...marketing, ...posts, ...legal];
+  return [...marketing, ...serviceDetails, ...news, ...posts, ...legal];
 }

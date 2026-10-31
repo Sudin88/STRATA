@@ -6,14 +6,15 @@ import { SITE, NAV_LINKS, SERVICES } from "@/lib/data";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 
-/** Service links deep-link to the matching card on the services page. */
+/** Service links deep-link to a service's page, or its card on the services page. */
 const SERVICE_LINKS = SERVICES.map((s) => ({
   label: s.title,
-  href: `/services#${s.id}`,
+  href: s.ctaHref ?? `/services#${s.id}`,
 }));
 
 const RESOURCE_LINKS = [
   { label: "Blog", href: "/blog" },
+  { label: "News", href: "/news" },
   { label: "Our Process", href: "/process" },
   { label: "Share Feedback", href: "/feedback" },
   { label: "Plans & Pricing", href: "/pricing" },

@@ -8,6 +8,7 @@ import {
   MessageSquareText,
   Target,
   Workflow,
+  CalendarRange,
   type LucideIcon,
 } from "lucide-react";
 import type { ServiceIconKey } from "@/lib/data";
@@ -21,6 +22,7 @@ const ICONS: Record<ServiceIconKey, LucideIcon> = {
   social: MessageSquareText,
   ads: Target,
   automation: Workflow,
+  event: CalendarRange,
 };
 
 export function ServiceIcon({

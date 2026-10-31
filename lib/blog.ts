@@ -3,6 +3,17 @@ import * as aiSeo from "@/content/blog/ai-seo";
 import * as geo from "@/content/blog/generative-engine-optimization";
 import * as aiAdVideos from "@/content/blog/ai-ad-videos";
 import * as googleAiContent from "@/content/blog/does-google-penalize-ai-content";
+import * as ownedVsRented from "@/content/blog/owned-vs-rented-attention";
+import * as eventMarketingTrends from "@/content/blog/event-marketing-trends";
+import * as virtualEventStrategy from "@/content/blog/virtual-event-strategy";
+import * as sustainableEvents from "@/content/blog/sustainable-events";
+import * as eventMeasurementRoi from "@/content/blog/event-measurement-roi";
+import * as pharmaHealthcareEvents from "@/content/blog/pharma-healthcare-events";
+import * as automotiveLaunchEvents from "@/content/blog/automotive-launch-events";
+import * as popupEventsActivations from "@/content/blog/popup-events-activations";
+import * as employeeEventsRecognition from "@/content/blog/employee-events-recognition";
+import * as legalFirmEvents from "@/content/blog/legal-firm-events";
+import * as agencyCaseStudies from "@/content/blog/agency-case-studies";
 
 /**
  * Blog registry. Each post is a module under content/blog/ that exports a
@@ -46,7 +57,23 @@ export interface Post extends PostMeta {
 }
 
 /** Every published post module. Add new posts here. */
-const modules: { meta: PostMeta; default: ComponentType }[] = [googleAiContent, aiAdVideos, geo, aiSeo];
+const modules: { meta: PostMeta; default: ComponentType }[] = [
+  eventMarketingTrends,
+  ownedVsRented,
+  virtualEventStrategy,
+  sustainableEvents,
+  eventMeasurementRoi,
+  pharmaHealthcareEvents,
+  automotiveLaunchEvents,
+  popupEventsActivations,
+  employeeEventsRecognition,
+  legalFirmEvents,
+  agencyCaseStudies,
+  googleAiContent,
+  aiAdVideos,
+  geo,
+  aiSeo,
+];
 
 /** Posts, newest first. */
 export const POSTS: Post[] = modules
